@@ -2,28 +2,16 @@ import sys
 import math
 
 
-
-            
-
-SUBSEQS =["AGATTA","GATTACA","TACAGA"]
-#SUBSEQS  = ['GAT', 'AGATTA']
-#SUBSEQS  =['AT', 'CG']
-#SUBSEQS  =['TT', 'AA','ACT']
-
-n = len(SUBSEQS)
-print(f"{SUBSEQS}", file=sys.stderr)
-DICO_SEQ = {}
-DICO = {}
+         
+n = int(input())
+SUBSEQS = [input() for _ in range(n)]
 SMALLEST_CHAIN = sys.maxsize
-
 
 def solve(seq,lis,minWin=sys.maxsize):
     if not lis:
         return minWin
     seq2 = lis.pop(0)
-    print(f"s1:{seq}s2:{seq2}")
     new_words = linkable(seq,seq2)
-    print(new_words)
     winner_words = []
     for n in new_words:
         w = True
@@ -59,17 +47,17 @@ def linkable(seq1,seq2):
             new_word = seq2[:-i]+seq1
             links.append(new_word)
             f2 = True
-    
     if not f1:
         new_word = seq1+seq2
         links.append(new_word)
-
     if not f2:
         new_word = seq2+seq1
         links.append(new_word)
     return links
 
-if n == 2:
+if n == 1:
+    print(len(SUBSEQS[0]))
+elif n == 2:
     if SUBSEQS[0] in SUBSEQS[1]: 
         print(len(SUBSEQS[1]))
     elif SUBSEQS[1] in SUBSEQS[0]: 
